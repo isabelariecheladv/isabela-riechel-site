@@ -7,7 +7,7 @@ Todas as páginas e a API do site. Os arquivos da raiz definem o layout global, 
 ## Interface
 
 - `layout.tsx:generateMetadata()`: título, descrição e Open Graph a partir de `getPublicSite()`.
-- `layout.tsx:RootLayout`: `<html lang="pt-BR">`, JSON-LD `LegalService`, `Header`, `<main id="conteudo">` e `Footer`.
+- `layout.tsx:RootLayout`: `<html lang="pt-BR">`, JSON-LD `LegalService`, `Header`, `<main id="conteudo">`, `Footer` e `Analytics` (só quando `NEXT_PUBLIC_GA_ID` está no formato `G-XXXX`).
 - `page.tsx:Home`: página inicial (hero com "Solicitar atendimento" como ação principal, áreas, manifesto, sobre, até 3 artigos, chamada de contato). `page.tsx:metadata` define a URL canônica `/`.
 - `icon.svg`: favicon quadrado com o monograma (o Google mostra o ícone nos resultados).
 - `not-found.tsx:NotFound`: página 404.

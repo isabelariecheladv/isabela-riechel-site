@@ -1,6 +1,7 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { track } from './Analytics';
 export function ContactForm(){
  const [status,setStatus]=useState<'idle'|'sending'|'sent'|'error'|'unconfigured'>('idle');
  const [error,setError]=useState('');
@@ -11,7 +12,7 @@ export function ContactForm(){
    try {
      const resp=await fetch('/api/contato',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
      const json=await resp.json();
-     if(resp.ok){setStatus('sent');form.reset();return;}
+     if(resp.ok){track('generate_lead',{subject:String(data.subject||'')});setStatus('sent');form.reset();return;}
      if(json.code==='NOT_CONFIGURED'){setStatus('unconfigured');return;}
      setError(json.error||'Não foi possível enviar sua mensagem.');setStatus('error');
    } catch {setError('Não foi possível acessar o envio neste momento.');setStatus('error');}

@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { Analytics } from '@/components/Analytics';
+// Só IDs no formato do GA4 entram no script inline.
+const gaId=/^G-[A-Z0-9]+$/.test(process.env.NEXT_PUBLIC_GA_ID||'')?process.env.NEXT_PUBLIC_GA_ID!:'';
 import { site } from '@/lib/site';
 import { getPublicSite, getServices } from '@/lib/sanity';
 export async function generateMetadata():Promise<Metadata>{
@@ -25,5 +28,5 @@ export default async function RootLayout({children}:{children:React.ReactNode}){
   areaServed:{'@type':'City',name:'Londrina'},
   ...(publicSite.mapsUrl?{hasMap:publicSite.mapsUrl}:{}),
   sameAs:[publicSite.instagram,publicSite.linkedin,publicSite.mapsUrl].filter(Boolean)};
- return <html lang="pt-BR"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Header/><main id="conteudo">{children}</main><Footer site={publicSite} services={services}/></body></html>;
+ return <html lang="pt-BR"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd).replace(/</g,'\\u003c')}}/><Header/><main id="conteudo">{children}</main><Footer site={publicSite} services={services} cookieSettings={Boolean(gaId)}/>{gaId&&<Analytics id={gaId}/>}</body></html>;
 }

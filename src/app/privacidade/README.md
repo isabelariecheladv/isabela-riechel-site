@@ -10,7 +10,7 @@ Página `/privacidade`.
 
 ## Invariantes
 
-- Mostra o texto do Sanity só se `legal.approved` for `true` e `body` não estiver vazio. Caso contrário, mostra a minuta fixa no código, marcada como sujeita a revisão.
+- Mostra o texto do Sanity só se `legal.approved` for `true` e `body` não estiver vazio. Caso contrário, mostra a minuta fixa no código, marcada como sujeita a revisão, que inclui a seção sobre cookies de estatística (Google Analytics). Um texto aprovado no Sanity substitui a minuta inteira e precisa trazer essa seção.
 
 ## Efeitos colaterais
 
